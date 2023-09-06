@@ -1,0 +1,35 @@
+
+
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 40px 80px;
+}
+.navbar a {
+    margin-right: 20px;
+    text-decoration: none;
+    font-weight: normal;
+    color: #C6DDFF;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* Den rechten Rand des letzten Elements auf 0 setzen, um übermäßigen Abstand zu verhindern */
+.navbar a:last-child {
+    margin-right: 0;
+}
+
+.navbar a.active {
+    font-weight: bold;
+    color: white;
+}
+
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif; /* Hier wird die Schriftart verwendet */
+}
