@@ -1,125 +1,122 @@
 
 
-
+/*
 document.addEventListener("DOMContentLoaded", function() {
 
-    const searchInput = document.querySelector(".search-input");
-    const vocabularyList = document.getElementById("word-list");
-    let vocabularyData = [];
+    //const searchInput = document.querySelector(".search-input");
+    //const vocabularyList = document.getElementById("word-list");
+   // let vocabularyData = [];
     let isPopupOpen = false;
 
 
     //die daten der csv werden mit diesen keys eingelesen
-    const tableHead1 = "Wort";
-    const tableHead2 = "Übersetzung";
-    const tableHead3 = "Spalte 3";
-    const tableHead4 = "Tag";
-    const tableHead5 = "Wortart";
-    const tableHead6 = "Spalte 6";
-    const tableHead7 = "Spalte 7";
-    const tableHead8 = "Spalte 8";
-    const tableHead9 = "Spalte 9";
-    const tableHead10 = "Spalte 10";
+   // const tableHead1 = "Wort";
+    // const tableHead2 = "Übersetzung";
+    // const tableHead3 = "Spalte 3";
+    // const tableHead4 = "Tag";
+    // const tableHead5 = "Wortart";
+    // const tableHead6 = "Spalte 6";
+    // const tableHead7 = "Spalte 7";
+    // const tableHead8 = "Spalte 8";
+    // const tableHead9 = "Spalte 9";
+    // const tableHead10 = "Spalte 10";
 
  
    
     //holt die Nomen und die Verben
-    Promise.all([
-        fetchVocabularyData("./Data/Nomen.csv"),
-        fetchVocabularyData("./Data/Verben.csv")   
-    ])
-    .then(([dataNomen, dataVerben]) => {
-        vocabularyData = dataNomen.concat(dataVerben);
-        updateTable(""); // Initialize the table without any filter
-    })
-    .catch(error => {
-        console.error("Fehler beim Laden der CSV-Datei:", error);
-    });
-       
-    //Wenn ich in der Suchleiste Tippe wird gesucht
-    searchInput.addEventListener("input", function() {
-        const searchTerm = searchInput.value.toLowerCase();
-        updateTable(searchTerm); // Update the table with the entered search term
-    });
+    // Promise.all([
+    //     fetchVocabularyData("./Data/Nomen.csv"),
+     //    fetchVocabularyData("./Data/Verben.csv")   
+     //])
+    // .then(([dataNomen, dataVerben]) => {
+    //     vocabularyData = dataNomen.concat(dataVerben);
+     //    updateTable(""); // Initialize the table without any filter
+    // })
+    // .catch(error => {
+    //     console.error("Fehler beim Laden der CSV-Datei:", error);
+    // });
+
+
 
     //holt die csv daten
-    function fetchVocabularyData(filename) {
-        return fetch(filename)
-            .then(response => response.text())
-            .then(csvText => parseCSV(csvText));
-    }
+    // function fetchVocabularyData(filename) {
+    //     return fetch(filename)
+     // //        .then(response => response.text())
+       //     .then(csvText => parseCSV(csvText));
+    // }
 
-    function parseCSV(csvText) {
-        const headers = [tableHead1, tableHead2,tableHead3,tableHead4, tableHead5, tableHead6, tableHead7, tableHead8,tableHead9,tableHead10]; 
-        const rows = Papa.parse(csvText, {
-            delimiter: ",",
-            header: false, // Deaktiviere die Verwendung der ersten Zeile als Überschriften
-            dynamicTyping: true
-        }).data.slice(1); // Überspringe die erste Zeile;
-        return rows.map(row => {
-            const entry = {};
-            headers.forEach((header, index) => {
-                entry[header] = row[index];
-            });
-            return entry;
-        });
-    }
+    //function parseCSV(csvText) {
+      //   const headers = [tableHead1, tableHead2,tableHead3,tableHead4, tableHead5, tableHead6, tableHead7, tableHead8,tableHead9,tableHead10]; 
+     //    const rows = Papa.parse(csvText, {
+       //      delimiter: ",",
+       //      header: false, // Deaktiviere die Verwendung der ersten Zeile als Überschriften
+       //      dynamicTyping: true
+      //   }).data.slice(1); // Überspringe die erste Zeile;
+      //   return rows.map(row => {
+       //      const entry = {};
+       //      headers.forEach((header, index) => {
+        // //         entry[header] = row[index];
+        //    });
+          //   return entry;
+       //  });
+    // }
 
-    function updateTable(searchTerm) {
-        const filteredData = vocabularyData.filter(entry =>
-            Object.values(entry).some(value =>
-                value.toString().toLowerCase().includes(searchTerm)
-            )
-        );
-        const tableHTML = createTableHTML(filteredData);
-        vocabularyList.innerHTML = tableHTML;
+
+
+
+
+
+     
+    //Wenn ich in der Suchleiste Tippe wird gesucht
+    //searchInput.addEventListener("input", function() {
+      //  const searchTerm = searchInput.value.toLowerCase();
+      //  updateTable(searchTerm); // Update the table with the entered search term
+    //});
+
+
+    //function updateTable(searchTerm) {
+       // const filteredData = vocabularyData.filter(entry =>
+       //     Object.values(entry).some(value =>
+        //        value.toString().toLowerCase().includes(searchTerm)
+        //    )
+       // );
+      //  const tableHTML = createTableHTML(filteredData);
+        //vocabularyList.innerHTML = tableHTML;
         //add klick listener to row
-        document.querySelector("tbody").addEventListener("click", function(event) {
-            const clickedRow = event.target.closest(".table-row");
-            if (clickedRow) {
+       // document.querySelector("tbody").addEventListener("click", function(event) {
+         //   const clickedRow = event.target.closest(".table-row");
+         //   if (clickedRow) {
                 //const entry = getEntryFromRow(clickedRow);
-                openPopup(clickedRow);   
-            }
-        });
-    }
-
-   
-
-
-
-
-
-
+           //     openPopup(clickedRow);   
+           // }
+        //});
+   // }
     //------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    function openPopup(entry) {
+   //function openPopup(entry) {
            //erhahalte das reine wort von der row auf die geklickt wurden
-           const clickedWord = entry.cells[0].textContent.trim();
+          // const clickedWord = entry.cells[0].textContent.trim();
            // Finde den entsprechenden Eintrag in der vocabularyData-Liste
-           const entryVocabulary = vocabularyData.find(item => item[tableHead1] === clickedWord);
+          // const entryVocabulary = vocabularyData.find(item => item[tableHead1] === clickedWord);
 
            
-        if (isPopupOpen || (entryVocabulary[tableHead5] === "Nomen" )) {
-            return; // Wenn ein Popup bereits geöffnet ist, verlasse die Funktion
-        }
+      //  if (isPopupOpen || (entryVocabulary[tableHead5] === "Nomen" )) {
+      //      return; // Wenn ein Popup bereits geöffnet ist, verlasse die Funktion
+      //  }
 
 
+        //isPopupOpen = true; // Setze die Variable auf true, um anzuzeigen, dass ein Popup geöffnet ist
 
+       // const overlay = document.getElementById("overlay");
+        //overlay.style.display = "block"; // Zeige das Overlay
 
-
-
-        isPopupOpen = true; // Setze die Variable auf true, um anzuzeigen, dass ein Popup geöffnet ist
-
-        const overlay = document.getElementById("overlay");
-        overlay.style.display = "block"; // Zeige das Overlay
-
-        const popup = document.createElement("div");
-        popup.className = "popup";
+        //const popup = document.createElement("div");
+       // popup.className = "popup";
     
      
 
-        let popupContent = `Hello world
-        `;
+       // let popupContent = `Hello world
+       // `;
 
         //content wenn der Einrag ein Verb ist
         if(entryVocabulary[ tableHead5] === "Verb"){
@@ -234,24 +231,24 @@ document.addEventListener("DOMContentLoaded", function() {
     
        
         // Hier kannst du den Inhalt des Popups basierend auf dem Eintrag erstellen
-        popup.innerHTML = popupContent;
+       // popup.innerHTML = popupContent;
     
         // Füge das Close-Icon hinzu
-        const closeIcon = document.createElement("span");
-        closeIcon.className = "popup-close";
-        closeIcon.innerHTML = "&#10006;";
-        popup.appendChild(closeIcon);
+       //const closeIcon = document.createElement("span");
+        //closeIcon.className = "popup-close";
+       //closeIcon.innerHTML = "&#10006;";
+       // popup.appendChild(closeIcon);
     
         // Event Listener für das Schließen des Popups
-        closeIcon.addEventListener("click", function() {
-            document.body.removeChild(popup); // Entferne das Popup aus dem DOM
-            overlay.style.display = "none"; // Verberge das Overlay
-            isPopupOpen = false;
+       // closeIcon.addEventListener("click", function() {
+       //     document.body.removeChild(popup); // Entferne das Popup aus dem DOM
+        //    overlay.style.display = "none"; // Verberge das Overlay
+        //    isPopupOpen = false;
             
-        });
+       // });
     
         // Füge das Popup zur Seite hinzu
-        document.body.appendChild(popup);
+        //document.body.appendChild(popup);
     }
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -260,57 +257,53 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-    function createTableHTML(data) {
-     
-
-
-
-        const headers = [tableHead1, tableHead2]; // Definiere hier die gemeinsamen Spaltenüberschriften die angezeigt werden 
-        const headerHTML = headers.map(header => `<th>${header}</th>`).join("");
-        const rowsHTML = data.map(entry => {
-        let translationValue;
+   // function createTableHTML(data) {
+     //   const headers = [tableHead1, tableHead2]; // Definiere hier die gemeinsamen Spaltenüberschriften die angezeigt werden 
+       // const headerHTML = headers.map(header => `<th>${header}</th>`).join("");
+        //const rowsHTML = data.map(entry => {
+        //let translationValue;
 
 
             // Überprüfe die Wortart, ob es sich um einen Verb-Eintrag handelt
-            if (entry[tableHead5] === "Verb") {
+          //  if (entry[tableHead5] === "Verb") {
                 // Hier werden die Werte aus den Spalten "Vergangenheit" und "Gegenwart" zusammengefügt
-                translationValue = `${entry[tableHead2]} / ${entry[tableHead3]}`;
+            //    translationValue = `${entry[tableHead2]} / ${entry[tableHead3]}`;
                 // Füge das Icon-HTML für Verben hinzu  
                 
-            }else if(entry[tableHead5] === "Nomen"){
+           // }else if(entry[tableHead5] === "Nomen"){
                  // Hier werden die Werte aus den Spalten "Übersetzung" und "Plural" zusammengefügt
-                translationValue = `${entry[tableHead2]} / ${entry[tableHead3]}`;
-            }
+             //   translationValue = `${entry[tableHead2]} / ${entry[tableHead3]}`;
+            //}
            
-            const iconHTML = '<img class="cell-icon" src="./icons/File.svg" alt="Icon">'; // Icon-HTML für Verben
-            const rowHTML = headers
+            //const iconHTML = '<img class="cell-icon" src="./icons/File.svg" alt="Icon">'; // Icon-HTML für Verben
+            //const rowHTML = headers
 
             //in der ersten spalte steht arabische schrift darum soll die größer sein
             //schauen ob es der erste wert ist dann ist es deutsche übersetzung sonst ist es der wert in der zweiten spalte der tabelle 
-                .map((header, index) => `
-                <td class="${index === 1 ? 'large-text' : entry[tableHead5] === 'Verb' ? 'verb-cell' : ''}">
-                ${index === 0 && entry[tableHead5] === 'Verb' ? `${entry[tableHead1]} ${iconHTML}` : index === 0 ? entry[tableHead1] : translationValue}
-                </td>
-                `
-                )
-                .join("");
-
-            return `<tr class="table-row">${rowHTML}</tr>`;
-        }).join("");
-
-        return `
-            <table>
-                <thead><tr>${headerHTML}</tr></thead>
-                <tbody>${rowsHTML}</tbody>
-            </table>
-        `;
+              //  .map((header, index) => `
+                //<td class="${index === 1 ? 'large-text' : entry[tableHead5] === 'Verb' ? 'verb-cell' : ''}">
+            //    ${index === 0 && entry[tableHead5] === 'Verb' ? `${entry[tableHead1]} ${iconHTML}` : index === 0 ? entry[tableHead1] : translationValue}
+             //   </td>
+               // `
+                //)
+                //.join("");
+//
+  //          return `<tr class="table-row">${rowHTML}</tr>`;
+    //    }).join("");
+//
+  //      return `
+    //        <table>
+      //          <thead><tr>${headerHTML}</tr></thead>
+        //        <tbody>${rowsHTML}</tbody>
+          //  </table>
+        //`;
 
        
-    } 
+    //} 
 
-});
-
-
+//});
 
 
 
+
+*/
