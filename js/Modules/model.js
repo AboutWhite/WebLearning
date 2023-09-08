@@ -1,9 +1,9 @@
 const model = {
     vocabularyData: [],
     searchResults:[],
+    tagList:[],
 
     setVocabularyData(vocabulary){
-        console.log("model set data");
         for(let i = 0; i< vocabulary.length; i++){
             this.vocabularyData[i]=vocabulary[i];
         } 
@@ -13,6 +13,12 @@ const model = {
         this.searchResults.length=0;
         for(let i = 0; i< words.length; i++){
             this.searchResults[i]=words[i];
+        }
+    },
+
+    setTags(words){
+        for(let i = 0; i< words.length; i++){
+            this.tagList[i]=words[i];
         }
     },
 

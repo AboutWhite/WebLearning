@@ -1,5 +1,5 @@
 import model from '/js/Modules/model.js';
-import {updateView,openPopup} from '/js/Modules/view.js';
+import {updateView,openPopup,updateList} from '/js/Modules/view.js';
 import dataService from '/js/Modules/dataService.js';
 
 
@@ -13,7 +13,11 @@ import dataService from '/js/Modules/dataService.js';
             const words = await dataService.fetchVocabularyData("./Data/Nomen.csv","./Data/Verben.csv");
             //wenn die daten geladen wurde will ich sie im model setzen
             model.setVocabularyData(words);
-            updateView(model.vocabularyData);
+            //im model will ich auch die zugehörigen tags setzten
+            model.setTags(dataService.getTags(model.vocabularyData));
+            //dann will ich im view die daten anzeigen
+            updateView(model.vocabularyData, model.tagList);
+            //die suchleiste ist static darum listener darauff
             addListener();
           } catch (error) {
             console.error("fetching vocabulary data went wrong",error);
@@ -31,8 +35,17 @@ import dataService from '/js/Modules/dataService.js';
 
       addClickListenerToTableRows();
       
+
+      //events kommen aus dem view
+      //wenn das popu geschlossen wird
       document.addEventListener("popupclosed", function (){
         popup = false
+      });
+      //wenn auf ein tag geklickt wurde
+      document.addEventListener("onTagClicked",function(event){
+        const tag= event.detail;
+        const filteredList = dataService.filterByTags(tag,model.vocabularyData);
+        updateList(filteredList); 
       });
 
     }

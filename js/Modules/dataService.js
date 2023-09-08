@@ -49,6 +49,29 @@ const dataService = {
           value.toString().toLowerCase().includes(searchTerm))
     );
     return filteredData;
+  },
+
+  //gibt alle benutzen tags der gesamten wortliste zurück
+   getTags(wordList){
+    const tags= new Set;
+    for (const entry of wordList) {
+      // Überprüfen, ob ein Tag gesetzt ist (nicht null oder undefined).
+      if (entry.hasOwnProperty("Tag") && entry["Tag"] && entry["Tag"]!="-") {
+        tags.add(entry["Tag"]);
+      }
+    }
+    const uniqueTagsArray = Array.from(tags);  
+    return uniqueTagsArray;
+  },
+
+  //gibt alle wörter mit dem spezifischen tag zurück
+  filterByTags(tag, words){
+    //console.log(tag["tag"]);
+    //console.log(words[7]["Tag"]);
+
+    let w=  words.filter(entry => entry.Tag === tag["tag"]);
+  
+    return w;
   }
   
 }

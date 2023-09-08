@@ -3,11 +3,23 @@
     const overlay = document.getElementById("overlay");
     const popupClosedEvent = new CustomEvent("popupclosed");
    
-    function updateView(vocabulary){
+  
+   
+    function updateView(vocabulary,tags){
         const tableHTML = createTableHTML(vocabulary);
         vocabularyList.innerHTML = tableHTML;
     }
+    function updateList(vocabulary){
+        const tableHTML = createTableHTML(vocabulary);
+        vocabularyList.innerHTML = tableHTML;
 
+    }
+
+   
+
+  
+
+   
     function createTableHTML(data) {
         //'Wort', 'Übersetzung', 'Spalte 3', 'Tag', 'Wortart', 'Spalte 6', 'Spalte 7', 'Spalte 8', 'Spalte 9', 'Spalte 10']
         const keys = Object.keys(data[0]);
@@ -178,11 +190,7 @@
 
 
             return popupContent;
-
     }
-
-
-
 
 
 
@@ -201,7 +209,8 @@
     }
 
 
-    export{updateView, openPopup};
+
+    export{updateView, openPopup,updateList};
 
 
 
