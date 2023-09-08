@@ -43,7 +43,7 @@ const dataService = {
   },
 
   //bekommt alle daten vom model und den searchterm und gibt dann eine auswahl zurück die auf den suchterm passt
-  getFilterData(data, searchTerm){
+  getFilterdData(data, searchTerm){
     const filteredData = data.filter(entry =>
       Object.values(entry).some(value =>
           value.toString().toLowerCase().includes(searchTerm))

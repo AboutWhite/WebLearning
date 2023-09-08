@@ -8,10 +8,6 @@ import dataService from '/js/Modules/dataService.js';
   let popup = false;
 
   async function  init(){
-        //click listener für ui elemente
-        document.addEventListener("popupclosed", function (){
-          popup = false
-        });
         try {
             //zuerst will ich die Vokabeln aus der csv Laden 
             const words = await dataService.fetchVocabularyData("./Data/Nomen.csv","./Data/Verben.csv");
@@ -25,19 +21,29 @@ import dataService from '/js/Modules/dataService.js';
     }
 
     function addListener(){
-
       searchInput.addEventListener("input", function() {
         const searchTerm = searchInput.value.toLowerCase();
-        const filteredData = dataService.getFilteredData(model.vocabularyData,searchTerm)
+        const filteredData = dataService.getFilterdData(model.vocabularyData,searchTerm)
         model.setSelectedWords(filteredData);
         updateView(model.searchResults);   
+        addClickListenerToTableRows();
       });
 
-      document.querySelector("tbody").addEventListener("click", function(event) {
-        //Todo ggf auslagern
+      addClickListenerToTableRows();
+      
+      document.addEventListener("popupclosed", function (){
+        popup = false
+      });
+
+    }
+
+
+    function  addClickListenerToTableRows(){
+      document.querySelector("table").addEventListener("click", function(event) {
         const clickedRow = event.target.closest(".table-row");
         const clickedWord = clickedRow.cells[0].textContent.trim();
         const entryVocabulary = model.vocabularyData.find(item => item.Wort === clickedWord);
+        console.log(entryVocabulary.Wortart);
 
         if (clickedRow && entryVocabulary.Wortart !="Nomen" && popup == false) {
             openPopup(entryVocabulary);   
