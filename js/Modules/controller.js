@@ -9,8 +9,10 @@ import dataService from '/js/Modules/dataService.js';
 
   async function  init(){
         try {
+         
             //zuerst will ich die Vokabeln aus der csv Laden 
-            const words = await dataService.fetchVocabularyData("./Data/Nomen.csv","./Data/Verben.csv");
+            //const words = await dataService.fetchVocabularyData("./Data/Nomen.csv","./Data/Verben.csv");
+            const words = await dataService.fetchVocabularyData("https://raw.githubusercontent.com/AboutWhite/WebLearning/modules/Data/Nomen.csv","https://raw.githubusercontent.com/AboutWhite/WebLearning/modules/Data/Verben.csv");
             //wenn die daten geladen wurde will ich sie im model setzen
             model.setVocabularyData(words);
             //im model will ich auch die zugehörigen tags setzten
